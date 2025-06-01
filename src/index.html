@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVerse - Loja de Jogos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">GameVerse</div>
+        <div class="nav-items">
+            <a href="#" class="active">Início</a>
+            <a href="#jogos">Jogos</a>
+            <a href="#sobre">Sobre</a>
+            <a href="login.html">Login</a>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="cart-items"></div>
+        <div class="cart-total">
+            <p>Total: R$ <span id="cart-total">0.00</span></p>
+            <button onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <header>
+        <h1>Bem-vindo à GameVerse</h1>
+        <p>Sua nova aventura começa aqui</p>
+    </header>
+
+    <section id="jogos" class="games-section">
+        <h2>Jogos em Destaque</h2>
+        <div class="filter-section">
+            <select id="priceFilter" onchange="applyFilters()">
+                <option value="all">Todos os Preços</option>
+                <option value="0-100">Até R$ 100</option>
+                <option value="100-200">R$ 100 - R$ 200</option>
+                <option value="200-300">R$ 200 - R$ 300</option>
+                <option value="300+">Acima de R$ 300</option>
+            </select>
+            <select id="genreFilter" onchange="applyFilters()">
+                <option value="all">Todos os Gêneros</option>
+                <option value="rpg">RPG</option>
+                <option value="action">Ação</option>
+                <option value="adventure">Aventura</option>
+                <option value="fps">FPS</option>
+            </select>
+        </div>
+        <div class="games-grid">
+            <div class="game-card" data-id="1" data-price="259.90" data-genre="rpg">
+                <img src="https://t.ctcdn.com.br/wqEHAobL4nEWOYs4BRfgM0Ax7NQ=/320x180/smart/i568317.jpeg" alt="Cyberpunk 2077">
+                <h3>Cyberpunk 2077</h3>
+                <p class="price">R$ 259,90</p>
+                <p class="description">Um RPG de ação em mundo aberto ambientado em Night City, uma megalópole perigosa onde você busca um implante único que é a chave da imortalidade.</p>
+                <button onclick="addToCart(1, 'Cyberpunk 2077', 259.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="2" data-price="299.90" data-genre="action">
+                <img src="https://image.api.playstation.com/vulcan/img/rnd/202011/1215/WyHa1BM3ISDVqYSEUMB9VZJs.png?w=440" alt="Red Dead Redemption 2">
+                <h3>Red Dead Redemption 2</h3>
+                <p class="price">R$ 299,90</p>
+                <p class="description">Uma épica história de honra e lealdade no alvorecer da era moderna. América, 1899. Arthur Morgan e a gangue Van der Linde são forçados a fugir após um assalto dar errado.</p>
+                <button onclick="addToCart(2, 'Red Dead Redemption 2', 299.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="3" data-price="159.90" data-genre="rpg">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU462kT6MEJNF-fu8kOzClWu2oRlXVB0Qzlw&s" alt="The Witcher 3">
+                <h3>The Witcher 3</h3>
+                <p class="price">R$ 159,90</p>
+                <p class="description">Como Geralt de Rívia, um caçador de monstros profissional, embarque em uma aventura épica em um mundo de fantasia devastado pela guerra e infestado de monstros.</p>
+                <button onclick="addToCart(3, 'The Witcher 3', 159.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="4" data-price="199.90" data-genre="action">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsy9m0IvPtLGV4EljpImDbmJWFuLFfG4PtZQ&s=" alt="God of War">
+                <h3>God of War Ragnarok</h3>
+                <p class="price">R$ 199,90</p>
+                <p class="description">Kratos e Atreus devem viajar pelos Nove Reinos em busca de respostas enquanto as forças asgardianas se preparam para uma batalha profetizada que causará o fim do mundo.</p>
+                <button onclick="addToCart(4, 'God of War', 199.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="5" data-price="299.90" data-genre="rpg">
+                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/YMUoJUYNX0xWk6eTKuZLr5Iw.jpg" alt="Elden Ring">
+                <h3>Elden Ring</h3>
+                <p class="price">R$ 299,90</p>
+                <p class="description">Um RPG de ação épico ambientado em um mundo vasto onde as terras se estendem entre reinos. Um drama no qual as várias vontades dos personagens se entrelaçam nas Terras Intermédias.</p>
+                <button onclick="addToCart(5, 'Elden Ring', 299.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="6" data-price="249.90" data-genre="action">
+                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202009/3021/5ayReKkz8RaBVuTvrxgA3rvh.png" alt="Spider-Man">
+                <h3>Spider-Man</h3>
+                <p class="price">R$ 249,90</p>
+                <p class="description">Em Marvel's Spider-Man, os mundos de Peter Parker e Spider-Man colidem em uma história original cheia de ação. Seja o herói em uma Nova York da Marvel vibrante e em mundo aberto.</p>
+                <button onclick="addToCart(6, 'Spider-Man', 249.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="7" data-price="199.90" data-genre="action">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpQvn6QTGyeZxBVrNTgspsqO_cADxLCVwhs_d5e5I63N4-3O3pNMbKblO4bcFvFlpNHaE&usqp=CAU" alt="Horizon Zero Dawn">
+                <h3>Horizon Zero Dawn</h3>
+                <p class="price">R$ 199,90</p>
+                <p class="description">Em um mundo pós-apocalíptico exuberante, criaturas mecânicas dominam a terra. A humanidade não é mais a espécie dominante, e a natureza reclamou as ruínas de uma civilização esquecida.</p>
+                <button onclick="addToCart(7, 'Horizon Zero Dawn', 199.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="8" data-price="349.90" data-genre="rpg">
+                <img src="https://cdn1.epicgames.com/offer/6f43ab8025ad42d18510aa91e9eb688b/EGS_FINALFANTASYVIIREMAKEINTERGRADE_SquareEnix_S1_2560x1440-85f829541a833442eaace75d02e0f07d" alt="Final Fantasy VII">
+                <h3>Final Fantasy VII Remake</h3>
+                <p class="price">R$ 349,90</p>
+                <p class="description">Uma reimaginação moderna do amado clássico. O mundo caiu sob o controle da Shinra Electric Power Company, uma sombria corporação que controla a força vital do planeta como energia mako.</p>
+                <button onclick="addToCart(8, 'Final Fantasy VII', 349.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="9" data-price="229.90" data-genre="action">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT69A7uNmYO30O0I9n-z3eT2cvuohKRHx0Tb2hNmpJ3l-VfNqCpz0_7cFQi0SyHMmHZxiQ&usqp=CAU" alt="Assassin's Creed Valhalla">
+                <h3>Assassin's Creed Valhalla</h3>
+                <p class="price">R$ 229,90</p>
+                <p class="description">Torne-se Eivor, um guerreiro viking lendário em uma busca por glória. Explore a Inglaterra dos Anos Sombrios enquanto ataca seus inimigos, desenvolve seu assentamento e consolida seu poder político.</p>
+                <button onclick="addToCart(9, 'Assassin\'s Creed Valhalla', 229.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="10" data-price="259.90" data-genre="fps">
+                <img src="https://sm.ign.com/t/ign_pl/screenshot/default/bez-tytulu_kytr.1280.jpg" alt="Resident Evil Village">
+                <h3>Resident Evil Village</h3>
+                <p class="price">R$ 259,90</p>
+                <p class="description">Ambientado anos após os eventos terríveis de Resident Evil 7, o novo jogo vê Ethan Winters e sua esposa Mia vivendo pacificamente em um novo local. Mas a tragédia os atinge mais uma vez.</p>
+                <button onclick="addToCart(10, 'Resident Evil Village', 259.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="11" data-price="349.90" data-genre="rpg">
+                <img src="https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/f5b6-demon_s_souls.jpeg.webp" alt="Demon's Souls">
+                <h3>Demon's Souls</h3>
+                <p class="price">R$ 349,90</p>
+                <p class="description">Completamente reconstruído do zero, este remake convida você a experimentar a história sombria e desafiadora que deu início ao gênero soulslike.</p>
+                <button onclick="addToCart(11, 'Demon\'s Souls', 349.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="12" data-price="199.90" data-genre="adventure">
+                <img src="https://cdn.awsli.com.br/600x700/1041/1041512/produto/144255309/death-stranding---pc-c-digo-digital-oupgi7qe1q.jpg" alt="Death Stranding">
+                <h3>Death Stranding</h3>
+                <p class="price">R$ 199,90</p>
+                <p class="description">Do lendário criador Hideo Kojima, uma experiência de jogo inovadora que desafia os limites do gênero. Carregue o peso de reconectar um mundo fragmentado nesta aventura única.</p>
+                <button onclick="addToCart(12, 'Death Stranding', 199.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="13" data-price="299.90" data-genre="action">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStHsBqt4bLOcflPEW4aAmKl7cSj9pBsXQOAVxvr_chA_1WX0D1PEvWR7TxYodiAEf8aDE&usqp=CAU" alt="Ghost of Tsushima">
+                <h3>Ghost of Tsushima</h3>
+                <p class="price">R$ 299,90</p>
+                <p class="description">Forge o caminho do Fantasma nesta aventura de ação em mundo aberto. Viaje pelo Japão feudal do século XIII, um país devastado pela guerra, enquanto você enfrenta os invasores mongóis.</p>
+                <button onclick="addToCart(13, 'Ghost of Tsushima', 299.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="14" data-price="99.90" data-genre="action">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SKhTfbjgSafI_HCti_xTIAhKiMyN-0SlIVDQLV79E6efueV19Q7rD-ril3ky0ZD8eI0&usqp=CAU" alt="Hades">
+                <h3>Hades</h3>
+                <p class="price">R$ 99,90</p>
+                <p class="description">Desafie o deus dos mortos enquanto você luta para sair do Submundo neste roguelike dungeon crawler dos criadores de Bastion e Transistor.</p>
+                <button onclick="addToCart(14, 'Hades', 99.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="15" data-price="249.90" data-genre="fps">
+                <img src="https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_DEATHLOOP_ArkaneStudios_S1_2560x1440-bf6d342edbd2411ccf24e326852fca93" alt="Deathloop">
+                <h3>Deathloop</h3>
+                <p class="price">R$ 249,90</p>
+                <p class="description">Dois assassinos rivais estão presos em um misterioso loop temporal na ilha de Blackreef. Como Colt, sua única chance de escapar é acabar com o ciclo assassinando oito alvos antes que o dia recomece.</p>
+                <button onclick="addToCart(15, 'Deathloop', 249.90)">Adicionar ao Carrinho</button>
+            </div>
+            <div class="game-card" data-id="16" data-price="199.90" data-genre="adventure">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/capsule_616x353.jpg?t=1730911936" alt="It Takes Two">
+                <h3>It Takes Two</h3>
+                <p class="price">R$ 199,90</p>
+                <p class="description">Embarque na jornada mais louca de sua vida em It Takes Two. Convide um amigo para se juntar gratuitamente com o Passe de Amigo e trabalhem juntos através de uma variedade de desafios divertidamente perturbadores.</p>
+                <button onclick="addToCart(16, 'It Takes Two', 199.90)">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about-section">
+        <h2>Sobre a GameVerse</h2>
+        <p>Somos uma loja dedicada aos gamers, trazendo os melhores títulos e experiências para nossos jogadores. Nossa seleção especial garante diversão e aventura para todos os gostos.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 GameVerse. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
