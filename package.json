@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Simple HTTP server",
   "scripts": {
-    "start": "node server.js"
+    "start": "node \"Pedro's Game/project/server.js\""
   }
 }
