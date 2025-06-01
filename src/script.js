@@ -5,6 +5,20 @@ function toggleCart() {
     cartSidebar.classList.toggle('active');
 }
 
+function filterByGenre() {
+    const genreFilter = document.getElementById('genreFilter').value;
+    const games = document.querySelectorAll('.game-card');
+
+    games.forEach(game => {
+        const genre = game.getAttribute('data-genre');
+        if (genreFilter === 'all' || genre === genreFilter) {
+            game.style.display = 'block';
+        } else {
+            game.style.display = 'none';
+        }
+    });
+}
+
 function addToCart(id, title, price) {
     const existingItem = cart.find(item => item.id === id);
     
@@ -106,32 +120,6 @@ function handleLogin(event) {
     }
     
     return false;
-}
-
-function applyFilters() {
-    const priceFilter = document.getElementById('priceFilter').value;
-    const genreFilter = document.getElementById('genreFilter').value;
-    const games = document.querySelectorAll('.game-card');
-
-    games.forEach(game => {
-        const price = parseFloat(game.getAttribute('data-price'));
-        const genre = game.getAttribute('data-genre');
-        let showByPrice = true;
-        let showByGenre = true;
-
-        // Filtro de preço
-        if (priceFilter !== 'all') {
-            const [min, max] = priceFilter.split('-').map(val => val === '+' ? Infinity : parseFloat(val));
-            showByPrice = price >= min && (max === Infinity ? true : price <= max);
-        }
-
-        // Filtro de gênero
-        if (genreFilter !== 'all') {
-            showByGenre = genre === genreFilter;
-        }
-
-        game.style.display = showByPrice && showByGenre ? 'block' : 'none';
-    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
